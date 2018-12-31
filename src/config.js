@@ -1,7 +1,6 @@
 'use strict'
 
 const {
-  help,
   unknownCmd,
 } = require('./logger');
 const {
