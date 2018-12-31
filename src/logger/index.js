@@ -79,11 +79,20 @@ const ignoredPathManagerLog = (op) => {
   console.log(`${messages[op]}`);
 }
 
+const unknownCmd = (cmd) => {
+  const message = 
+  `Error: unknown command "${cmd}"
+  Please use "watchkube help" for usage.
+  `
+  console.log(message);
+}
+
 module.exports = {
   configManagerLog,
   help,
   ignoredPathManagerLog,
   errorsLog,
   statusLog,
+  unknownCmd,
   watchLog,
 }

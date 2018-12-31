@@ -1,6 +1,8 @@
 'use strict'
+
 const {
   help,
+  unknownCmd,
 } = require('./src/logger');
 const {
   config,
@@ -23,4 +25,9 @@ const main = {
   watch: startWatching,
 };
 
-main[operation](action, args);
+if (Object.keys(main).includes(operation)) {
+  main[operation](action, args);
+} else {
+  unknownCmd(operation);
+  return;
+}
