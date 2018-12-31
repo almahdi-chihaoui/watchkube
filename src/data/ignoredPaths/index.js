@@ -3,7 +3,7 @@
 const {
   configData,
   dataFilePath,
-} = require('../configurations')
+} = require('../configurations');
 
 const {
   createIgnoredPathData,
@@ -15,6 +15,10 @@ const {
   removeIgnoredPathData,
 } = require('./remove');
 
+const {
+  ignoredPathManagerLog,
+} = require('../../logger');
+
 const createIgnoredPath = (args) => {
   if (
     args.length === 1
@@ -23,7 +27,7 @@ const createIgnoredPath = (args) => {
     const path = args[0];
     createIgnoredPathData(path, configData, dataFilePath);
   } else {
-    console.error('Wrong arguments, please provide: path');
+    ignoredPathManagerLog('createWrongArgs');
   }
 }
 
@@ -33,10 +37,10 @@ const removeIgnoredPath = (args) => {
     if (!isNaN(id)) {
       removeIgnoredPathData(id, configData, dataFilePath);
     } else {
-      console.log('Please provide a valid id');
+      ignoredPathManagerLog('invalidId');
     }
   } else {
-    console.error('Wrong arguments, please provide: id');
+    ignoredPathManagerLog('removeWrongArgs');
   }
 }
 

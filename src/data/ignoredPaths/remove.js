@@ -2,6 +2,10 @@
 
 const fs = require('fs');
 
+const {
+  ignoredPathManagerLog,
+} = require('../../logger');
+
 const removeIgnoredPathData = (id, configData, dataFilePath) => {
   const ignoredPathToDelete = configData.ignoredPaths.find(ip => (ip.id === id));
   if (ignoredPathToDelete) {
@@ -15,8 +19,9 @@ const removeIgnoredPathData = (id, configData, dataFilePath) => {
       dataFilePath,
       JSON.stringify(updatedConfigData),
     );
+    ignoredPathManagerLog('remove');
   } else {
-    console.log('Error: path not found');
+    ignoredPathManagerLog('pathNotFound');
   }
 };
 

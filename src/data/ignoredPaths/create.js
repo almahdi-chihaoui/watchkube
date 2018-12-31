@@ -2,6 +2,10 @@
 
 const fs = require('fs');
 
+const {
+  ignoredPathManagerLog,
+} = require('../../logger');
+
 const createIgnoredPathData = (path, configData, dataFilePath) => {
   const newId = configData.ignoredPaths.length > 0
     ? configData.ignoredPaths.reduce((prev, curr) => {
@@ -23,7 +27,7 @@ const createIgnoredPathData = (path, configData, dataFilePath) => {
     dataFilePath,
     JSON.stringify(newConfigData),
   );
-  console.log('The new path was added successfully')
+  ignoredPathManagerLog('create');
 }
 
 module.exports = {
