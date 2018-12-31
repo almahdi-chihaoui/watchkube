@@ -21,7 +21,6 @@ const config = (action, args) => {
     unknownCmd(action);
     return;
   }
-  
 }
 
 module.exports = {
