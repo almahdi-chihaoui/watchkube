@@ -6,6 +6,7 @@ const os = require('os');
 const { configData } = require('./data/configurations');
 const { updateKube } = require('./kubernetes');
 const {
+  configManagerLog,
   errorsLog,
   statusLog,
   watchLog,
@@ -16,6 +17,11 @@ const startWatching = () => {
 
   const watchedPaths = configData.configs
     .map(cfg => cfg.localDir);
+
+  if (watchedPaths.length === 0) {
+    configManagerLog('noConfigs');
+    return;
+  }
 
   const ignoredPaths = configData.ignoredPaths
     .map(ip => ip.path);
