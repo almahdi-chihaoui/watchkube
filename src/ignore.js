@@ -1,6 +1,9 @@
 'use strict'
 
 const {
+  unknownCmd,
+} = require('./logger');
+const {
   createIgnoredPath,
   listIgnoredPaths,
   removeIgnoredPath,
@@ -12,7 +15,12 @@ const ignore = (action, args) => {
     list: listIgnoredPaths,
     remove: removeIgnoredPath,
   }
-  return actions[action](args);
+  if (Object.keys(actions).includes(action)) {
+    return actions[action](args);
+  } else {
+    unknownCmd(action);
+    return;
+  }
 }
 
 module.exports = {
