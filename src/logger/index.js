@@ -29,6 +29,19 @@ const errorsLog = (errorSide, detail) => {
   console.log(`\x1b[31m${messages[errorSide]}`);
 }
 
+configManagerLog = (op) => {
+  const messages = {
+    create: 'The new config was added successfully',
+    remove: 'The specified config was removed successfully',
+    configNotFound: 'Error: config not found',
+    noConfigs: 'No configs found',
+    createWrongArgs: 'Wrong arguments, please provide: selector localDir remoteDir',
+    removeWrongArgs: 'Wrong arguments, please provide: id',
+    invalidId: 'Please provide a valid id',
+  };
+  console.log(`${messages[op]}`);
+}
+
 module.exports = {
   errorsLog,
   statusLog,
