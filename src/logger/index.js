@@ -29,7 +29,7 @@ const errorsLog = (errorSide, detail) => {
   console.log(`\x1b[31m${messages[errorSide]}`);
 }
 
-configManagerLog = (op) => {
+const configManagerLog = (op) => {
   const messages = {
     create: 'The new config was added successfully',
     remove: 'The specified config was removed successfully',
@@ -42,7 +42,7 @@ configManagerLog = (op) => {
   console.log(`${messages[op]}`);
 }
 
-ignoredPathManagerLog = (op) => {
+const ignoredPathManagerLog = (op) => {
   const messages = {
     create: 'The new path was added successfully',
     remove: 'The specified path was removed successfully',
