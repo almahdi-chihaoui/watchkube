@@ -41,7 +41,7 @@ const removeConfig = (args) => {
     if (!isNaN(id)) {
       removeConfigData(id, configData, dataFilePath);
     } else {
-      configManagerLog('invalidId');;
+      configManagerLog('invalidId');
     }
   } else {
     configManagerLog('removeWrongArgs');
