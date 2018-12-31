@@ -42,6 +42,19 @@ configManagerLog = (op) => {
   console.log(`${messages[op]}`);
 }
 
+ignoredPathManagerLog = (op) => {
+  const messages = {
+    create: 'The new path was added successfully',
+    remove: 'The specified path was removed successfully',
+    pathNotFound: 'Error: path not found',
+    noPaths: 'No paths found',
+    createWrongArgs: 'Wrong arguments, please provide: path',
+    removeWrongArgs: 'Wrong arguments, please provide: id',
+    invalidId: 'Please provide a valid id',
+  };
+  console.log(`${messages[op]}`);
+}
+
 module.exports = {
   errorsLog,
   statusLog,
