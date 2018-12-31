@@ -81,7 +81,7 @@ const ignoredPathManagerLog = (op) => {
 
 const unknownCmd = (cmd) => {
   const message = 
-  `Error: unknown command "${cmd}"
+  `Error: unknown command "${cmd ? cmd : ''}"
   Please use "watchkube help" for usage.
   `
   console.log(message);
