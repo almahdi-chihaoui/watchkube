@@ -2,6 +2,10 @@
 
 const fs = require('fs');
 
+const {
+  configManagerLog,
+} = require('../../logger');
+
 const createConfigData = (selector, localDir, remoteDir, configData, dataFilePath) => {
   const newId = configData.configs.length > 0
     ? configData.configs.reduce((prev, curr) => {
@@ -25,7 +29,7 @@ const createConfigData = (selector, localDir, remoteDir, configData, dataFilePat
     dataFilePath,
     JSON.stringify(newConfigData),
   );
-  console.log('The new config was added successfully')
+  configManagerLog('create');
 }
 
 module.exports = {

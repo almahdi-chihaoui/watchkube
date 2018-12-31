@@ -3,7 +3,7 @@
 const {
   dataFilePath,
   configData,
-} = require('../configurations')
+} = require('../configurations');
 
 const {
   createConfigData,
@@ -14,6 +14,10 @@ const {
 const {
   removeConfigData,
 } = require('./remove');
+
+const {
+  configManagerLog,
+} = require('../../logger');
 
 const createConfig = (args) => {
   if (
@@ -27,7 +31,7 @@ const createConfig = (args) => {
     const remoteDir = args[2];
     createConfigData(selector, localDir, remoteDir, configData, dataFilePath);
   } else {
-    console.error('Wrong arguments, please provide: selector localDir remoteDir');
+    configManagerLog('createWrongArgs');
   }
 }
 
@@ -37,10 +41,10 @@ const removeConfig = (args) => {
     if (!isNaN(id)) {
       removeConfigData(id, configData, dataFilePath);
     } else {
-      console.log('Please provide a valid id');
+      configManagerLog('invalidId');;
     }
   } else {
-    console.error('Wrong arguments, please provide: id');
+    configManagerLog('removeWrongArgs');
   }
 }
 
