@@ -1,5 +1,29 @@
 'use strict'
 
+const help = () => {
+  const helpText =
+  `  */ To start the watcher: "watchkube watch" 
+
+  */ To configure the watcher, You need to specify the resource to confgiure and the action:
+      "watchkube [resource] [action] [args]"
+
+      **/ Resources:
+        - config: the config resource is used to configure the watcher by specifying pod selectors,
+            local paths to watch as well as remote path inside the container of the targeted pod.
+              "watchkube config create [selector] [localDir] [remoteDir]" : create a new config.
+              "watchkube config list" : list all configs.
+              "watchkube config remove [id]" : remove a config.
+
+        - ignore: the ignored paths resource is used to configure the watcher by specifying local paths
+            to be ignored by the watcher (exp: "/**/node_modules/*").
+              "watchkube ignore create [path]" : create a new ignored path.
+              "watchkube ignore list" : list all ignored paths.
+              "watchkube ignore remove [id]" : remove an ignored path.
+
+  More info and demo: https://github.com/almahdi-chihaoui/watchkube#readme`;
+  console.log(helpText);
+}
+
 const watchLog = (event, path) => {
   const messages = {
     change: `Changes detected: ${path}`,
@@ -57,6 +81,7 @@ const ignoredPathManagerLog = (op) => {
 
 module.exports = {
   configManagerLog,
+  help,
   ignoredPathManagerLog,
   errorsLog,
   statusLog,

@@ -1,5 +1,7 @@
 'use strict'
-
+const {
+  help,
+} = require('./src/logger');
 const {
   config,
 } = require('./src/config')
@@ -16,6 +18,7 @@ const args = process.argv.slice(4);
 
 const main = {
   config,
+  help,
   ignore,
   watch: startWatching,
 };
