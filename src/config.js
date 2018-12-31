@@ -1,6 +1,10 @@
 'use strict'
 
 const {
+  help,
+  unknownCmd,
+} = require('./logger');
+const {
   createConfig,
   listConfigs,
   removeConfig,
@@ -12,7 +16,13 @@ const config = (action, args) => {
     list: listConfigs,
     remove: removeConfig,
   }
-  return actions[action](args);
+  if (Object.keys(actions).includes(action)) {
+    return actions[action](args);
+  } else {
+    unknownCmd(action);
+    return;
+  }
+  
 }
 
 module.exports = {
