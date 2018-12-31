@@ -56,6 +56,8 @@ ignoredPathManagerLog = (op) => {
 }
 
 module.exports = {
+  configManagerLog,
+  ignoredPathManagerLog,
   errorsLog,
   statusLog,
   watchLog,
