@@ -1,5 +1,9 @@
 'use strict'
 
+const {
+  MAIN_DIR,
+} = require('../../settings');
+
 const execScriptFileCmd = (os, scriptFile) => {
   const cmd = {
     unix: `sh ${scriptFile}`,
@@ -13,7 +17,7 @@ const applyChanges = (platform, os, selector, localPath, remotePath) => {
     unix: 'applyChanges.sh',
     windows: 'applyChanges',
   }
-  return `/usr/local/lib/node_modules/watchkube/src/${platform}/${os}/${scriptFile[os]} ${localPath} ${selector} ${remotePath}`;
+  return `${MAIN_DIR}/src/${platform}/${os}/${scriptFile[os]} ${localPath} ${selector} ${remotePath}`;
 };
 
 const deleteFile = (platform, os, selector, remotePath) => {
@@ -21,7 +25,7 @@ const deleteFile = (platform, os, selector, remotePath) => {
     unix: 'deleteFile.sh',
     windows: 'deleteFile',
   }
-  return `/usr/local/lib/node_modules/watchkube/src/${platform}/${os}/${scriptFile[os]} ${selector} ${remotePath}`;
+  return `${MAIN_DIR}/src/${platform}/${os}/${scriptFile[os]} ${selector} ${remotePath}`;
 };
 
 const deleteFolder = (platform, os, selector, remotePath) => {
@@ -29,7 +33,7 @@ const deleteFolder = (platform, os, selector, remotePath) => {
     unix: 'deleteFolder.sh',
     windows: 'deleteFolder',
   }
-  return `/usr/local/lib/node_modules/watchkube/src/${platform}/${os}/${scriptFile[os]} ${selector} ${remotePath}`;
+  return `${MAIN_DIR}/src/${platform}/${os}/${scriptFile[os]} ${selector} ${remotePath}`;
 };
 
 module.exports = {
