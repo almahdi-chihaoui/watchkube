@@ -1,5 +1,7 @@
 'use strict'
 
+const path = require('path');
+
 const {
   MAIN_DIR,
 } = require('../../settings');
@@ -17,7 +19,7 @@ const applyChanges = (platform, os, selector, localPath, remotePath) => {
     unix: 'applyChanges.sh',
     windows: 'applyChanges',
   }
-  return `${MAIN_DIR}/src/${platform}/${os}/${scriptFile[os]} ${localPath} ${selector} ${remotePath}`;
+  return path.join(MAIN_DIR, `/src/${platform}/${os}/${scriptFile[os]} ${localPath} ${selector} ${remotePath}`);
 };
 
 const deleteFile = (platform, os, selector, remotePath) => {
@@ -25,7 +27,7 @@ const deleteFile = (platform, os, selector, remotePath) => {
     unix: 'deleteFile.sh',
     windows: 'deleteFile',
   }
-  return `${MAIN_DIR}/src/${platform}/${os}/${scriptFile[os]} ${selector} ${remotePath}`;
+  return path.join(MAIN_DIR, `/src/${platform}/${os}/${scriptFile[os]} ${selector} ${remotePath}`);
 };
 
 const deleteFolder = (platform, os, selector, remotePath) => {
@@ -33,7 +35,7 @@ const deleteFolder = (platform, os, selector, remotePath) => {
     unix: 'deleteFolder.sh',
     windows: 'deleteFolder',
   }
-  return `${MAIN_DIR}/src/${platform}/${os}/${scriptFile[os]} ${selector} ${remotePath}`;
+  return path.join(MAIN_DIR, `/src/${platform}/${os}/${scriptFile[os]} ${selector} ${remotePath}`);
 };
 
 module.exports = {
