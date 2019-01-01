@@ -14,6 +14,9 @@ const {
 const {
   startWatching,
 } = require('./src/watch')
+const {
+  version,
+} = require('./package.json');
 
 const operation = process.argv[2];
 const action = process.argv[3];
@@ -24,6 +27,7 @@ const main = {
   help,
   ignore,
   watch: startWatching,
+  version: () => console.log(version),
 };
 
 if (Object.keys(main).includes(operation)) {
