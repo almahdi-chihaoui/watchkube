@@ -1,5 +1,7 @@
 'use strict'
 
+const path = require('path');
+
 const {
   configData,
   dataFilePath,
@@ -24,8 +26,10 @@ const createIgnoredPath = (args) => {
     args.length === 1
     && args[0]
   ) {
-    const path = args[0];
-    createIgnoredPathData(path, configData, dataFilePath);
+    const ignoredPath = args[0].startsWith('.')
+      ? path.join(process.cwd(), args[0].slice(1))
+      : args[0];
+    createIgnoredPathData(ignoredPath, configData, dataFilePath);
   } else {
     ignoredPathManagerLog('createWrongArgs');
   }
