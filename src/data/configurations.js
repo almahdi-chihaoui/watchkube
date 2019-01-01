@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-const dataFilePath = 'src/data/data/data.json'
+const dataFilePath = '/usr/local/lib/node_modules/watchkube/src/data/data/data.json'
 const dataFile = fs.readFileSync(dataFilePath);
 const configData = JSON.parse(dataFile);
 
