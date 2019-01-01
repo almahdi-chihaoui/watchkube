@@ -27,8 +27,9 @@ const createConfig = (args) => {
     && args[2]
   ) {
     const selector = args[0];
-    const localDir = args[1];
+    const localDir = args[1] === '.' ? process.cwd() : args[1];
     const remoteDir = args[2];
+
     createConfigData(selector, localDir, remoteDir, configData, dataFilePath);
   } else {
     configManagerLog('createWrongArgs');
