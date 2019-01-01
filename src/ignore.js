@@ -11,7 +11,7 @@ const {
 
 const ignore = (action, args) => {
   const actions = {
-    create: createIgnoredPath,
+    add: createIgnoredPath,
     list: listIgnoredPaths,
     remove: removeIgnoredPath,
   }

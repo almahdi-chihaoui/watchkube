@@ -11,7 +11,7 @@ const {
 
 const config = (action, args) => {
   const actions = {
-    create: createConfig,
+    add: createConfig,
     list: listConfigs,
     remove: removeConfig,
   }
