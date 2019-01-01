@@ -2,7 +2,6 @@
   "name": "watchkube",
   "version": "1.0.0",
   "description": "WatchKube is a tool built with JavaScript that can speed up development process of applications that are running inside containers in a Kubernetes cluster.",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,6 +17,10 @@
   ],
   "author": "Mahdi Chihaoui",
   "license": "MIT",
+  "preferGlobal": true,
+  "bin": {
+    "watchkube": "index.js"
+  },
   "bugs": {
     "url": "https://github.com/almahdi-chihaoui/watchkube/issues"
   },
