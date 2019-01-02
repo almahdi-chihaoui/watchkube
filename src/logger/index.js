@@ -10,13 +10,13 @@ const help = () => {
       **/ Resources:
         - config: the config resource is used to configure the watcher by specifying pod selectors,
             local paths to watch as well as remote path inside the container of the targeted pod.
-              "watchkube config create [selector] [localDir] [remoteDir]" : create a new config.
+              "watchkube config add [selector] [localDir] [remoteDir]" : add a new config.
               "watchkube config list" : list all configs.
               "watchkube config remove [id]" : remove a config.
 
         - ignore: the ignored paths resource is used to configure the watcher by specifying local paths
             to be ignored by the watcher (exp: "/**/node_modules/*").
-              "watchkube ignore create [path]" : create a new ignored path.
+              "watchkube ignore add [path]" : add a new ignored path.
               "watchkube ignore list" : list all ignored paths.
               "watchkube ignore remove [id]" : remove an ignored path.
 
@@ -58,7 +58,7 @@ const configManagerLog = (op) => {
     create: 'The new config was added successfully',
     remove: 'The specified config was removed successfully',
     configNotFound: 'Error: config not found',
-    noConfigs: 'No configs found, please use "watchkube config create" to add new config',
+    noConfigs: 'No configs found, please use "watchkube config add" to add new config',
     createWrongArgs: 'Wrong arguments, please provide: selector localDir remoteDir',
     removeWrongArgs: 'Wrong arguments, please provide: id',
     invalidId: 'Please provide a valid id',
@@ -71,7 +71,7 @@ const ignoredPathManagerLog = (op) => {
     create: 'The new path was added successfully',
     remove: 'The specified path was removed successfully',
     pathNotFound: 'Error: path not found',
-    noPaths: 'No paths found, please use "watchkube ignore create" to add new ignored path',
+    noPaths: 'No paths found, please use "watchkube ignore add" to add new ignored path',
     createWrongArgs: 'Wrong arguments, please provide: path',
     removeWrongArgs: 'Wrong arguments, please provide: id',
     invalidId: 'Please provide a valid id',
