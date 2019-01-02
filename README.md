@@ -61,7 +61,7 @@ https://github.com/almahdi-chihaoui/watchkube-demo-be.git
 
 https://github.com/almahdi-chihaoui/watchkube-demo-fe.git
 
-Change the API adress in the frontend app in src/index.js  to the adress of kubernetes cluster (minikube ip) if you are using minikube.
+Change the API adress in the frontend app in src/index.js  to the adress of your kubernetes cluster (minikube ip) if you are using minikube.
 
 ## API
 
