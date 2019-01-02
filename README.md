@@ -4,7 +4,7 @@ WatchKube is a tool built with JavaScript that can speed up development process 
 It watches your projects' local paths for changes, when you make some changes in one of your projects, it apply them to the container running inside a Kubernetes pod.
 
 ## Motivations
-The microservice architecture is on fire, everyone is using it, either from scratch or decomposing their monolothic apps. Awesome tools and platforms like Docker and Kubernetes were built to handle and automate the operational side that such an architecture made it almost impossible to handle. 
+The microservice architecture is on fire, everyone is using it, either from scratch or decomposing their monolithic apps. Awesome tools and platforms like Docker and Kubernetes were built to handle and automate the operational side that such an architecture made it almost impossible to handle. 
 
 Following DevOps pattern, the development environment needs to be similar to the production environment, thus, those tools and platforms need to be used in the development environment, which complicated the development process and made it harder, especially when working with multiple services at the same time.
 
