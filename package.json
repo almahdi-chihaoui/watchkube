@@ -1,6 +1,6 @@
 {
   "name": "watchkube",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "WatchKube is a tool built with JavaScript that can speed up development process of applications that are running inside containers in a Kubernetes cluster.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
