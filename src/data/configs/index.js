@@ -21,16 +21,16 @@ const {
 
 const createConfig = (args) => {
   if (
-    args.length === 3
-    && args[0]
+    args[0]
     && args[1]
     && args[2]
   ) {
-    const selector = args[0];
-    const localDir = args[1] === '.' ? process.cwd() : args[1];
-    const remoteDir = args[2];
+    const localDir = args[0] === '.' ? process.cwd() : args[1];
+    const remoteDir = args[1];
+    const selector = args[2];
+    const containerName = args[3] || ''; 
 
-    createConfigData(selector, localDir, remoteDir, configData, dataFilePath);
+    createConfigData(selector, localDir, remoteDir, configData, dataFilePath, containerName);
   } else {
     configManagerLog('createWrongArgs');
   }
