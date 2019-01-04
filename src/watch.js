@@ -46,7 +46,7 @@ const startWatching = () => {
       const remotePath = `${targetPodconfig.remoteDir}${subPath}`;
 
       statusLog('updating');
-      updateKube(osType, event, targetPodconfig.selector, path, remotePath)
+      updateKube(osType, event, targetPodconfig.selector, path, remotePath, targetPodconfig.containerName)
         .on('close', (code) => {
           if (!code) {
             statusLog('updated');

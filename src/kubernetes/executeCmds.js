@@ -14,28 +14,31 @@ const execScriptFileCmd = (os, scriptFile) => {
   return cmd[os];
 };
 
-const applyChanges = (platform, os, selector, localPath, remotePath) => {
+const applyChanges = (platform, os, selector, localPath, remotePath, containerName) => {
   const scriptFile = {
     unix: 'applyChanges.sh',
     windows: 'applyChanges',
   }
-  return path.join(MAIN_DIR, `/src/${platform}/${os}/${scriptFile[os]} ${localPath} ${selector} ${remotePath}`);
+  const targetContainer = containerName ? `-c ${containerName}` : '';
+  return path.join(MAIN_DIR, `/src/${platform}/${os}/${scriptFile[os]} ${localPath} ${selector} ${remotePath} ${targetContainer}`);
 };
 
-const deleteFile = (platform, os, selector, remotePath) => {
+const deleteFile = (platform, os, selector, remotePath, containerName) => {
   const scriptFile = {
     unix: 'deleteFile.sh',
     windows: 'deleteFile',
   }
-  return path.join(MAIN_DIR, `/src/${platform}/${os}/${scriptFile[os]} ${selector} ${remotePath}`);
+  const targetContainer = containerName ? `-c ${containerName}` : '';
+  return path.join(MAIN_DIR, `/src/${platform}/${os}/${scriptFile[os]} ${selector} ${remotePath} ${targetContainer}`);
 };
 
-const deleteFolder = (platform, os, selector, remotePath) => {
+const deleteFolder = (platform, os, selector, remotePath, containerName) => {
   const scriptFile = {
     unix: 'deleteFolder.sh',
     windows: 'deleteFolder',
   }
-  return path.join(MAIN_DIR, `/src/${platform}/${os}/${scriptFile[os]} ${selector} ${remotePath}`);
+  const targetContainer = containerName ? `-c ${containerName}` : '';
+  return path.join(MAIN_DIR, `/src/${platform}/${os}/${scriptFile[os]} ${selector} ${remotePath} ${targetContainer}`);
 };
 
 module.exports = {
