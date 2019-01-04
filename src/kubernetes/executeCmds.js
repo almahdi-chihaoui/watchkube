@@ -16,29 +16,26 @@ const execScriptFileCmd = (os, scriptFile) => {
 
 const applyChanges = (platform, os, selector, localPath, remotePath, containerName) => {
   const scriptFile = {
-    unix: 'applyChanges.sh',
-    windows: 'applyChanges',
+    unix: 'cp.sh',
+    windows: 'cp',
   }
-  const targetContainer = containerName ? `-c ${containerName}` : '';
-  return path.join(MAIN_DIR, `/src/${platform}/${os}/${scriptFile[os]} ${localPath} ${selector} ${remotePath} ${targetContainer}`);
+  return path.join(MAIN_DIR, `/src/${platform}/${os}/${scriptFile[os]} ${localPath} ${selector} ${remotePath} ${containerName}`);
 };
 
 const deleteFile = (platform, os, selector, remotePath, containerName) => {
   const scriptFile = {
-    unix: 'deleteFile.sh',
-    windows: 'deleteFile',
+    unix: 'rm.sh file',
+    windows: 'rm file',
   }
-  const targetContainer = containerName ? `-c ${containerName}` : '';
-  return path.join(MAIN_DIR, `/src/${platform}/${os}/${scriptFile[os]} ${selector} ${remotePath} ${targetContainer}`);
+  return path.join(MAIN_DIR, `/src/${platform}/${os}/${scriptFile[os]} ${selector} ${remotePath} ${containerName}`);
 };
 
 const deleteFolder = (platform, os, selector, remotePath, containerName) => {
   const scriptFile = {
-    unix: 'deleteFolder.sh',
-    windows: 'deleteFolder',
+    unix: 'rm.sh fldr',
+    windows: 'rm fldr',
   }
-  const targetContainer = containerName ? `-c ${containerName}` : '';
-  return path.join(MAIN_DIR, `/src/${platform}/${os}/${scriptFile[os]} ${selector} ${remotePath} ${targetContainer}`);
+  return path.join(MAIN_DIR, `/src/${platform}/${os}/${scriptFile[os]} ${selector} ${remotePath} ${containerName}`);
 };
 
 module.exports = {

@@ -18,8 +18,7 @@ const updateKube = (os, event, selector, localPath, remotePath, containerName) =
     addDir: () => execScriptFileCmd(os, applyChanges(platform, os, selector, localPath, remotePath, containerName)),
     unlinkDir: () => execScriptFileCmd(os, deleteFolder(platform, os, selector, remotePath, containerName)),
   };
-  
-  return exec(mapEventsToCmds[event]())
+  return exec(mapEventsToCmds[event]());
 }
 
 module.exports = {
