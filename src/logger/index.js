@@ -10,13 +10,15 @@ const help = () => {
       **/ Resources:
         - config: the config resource is used to configure the watcher by specifying pod selectors,
             local paths to watch as well as remote path inside the container of the targeted pod.
-              "watchkube config add [localDir] [remoteDir] [selector] [container]" : add a new config,
-                if you don't specify a container, the first one will be selected.
+              "watchkube config add [localDir] [remoteDir] -s [selector] -c [container] -n [namespace]" : add a new config.
+                - [localDir] [remoteDir] -s [selector] are reauired.
+                - if you don't specify a container, the first one will be selected.
+                - if you don't specify a namespace, the default namespace will be selected.
               "watchkube config list" : list all configs.
               "watchkube config remove [id]" : remove a config.
 
-        - ignore: the ignored paths resource is used to configure the watcher by specifying local paths
-            to be ignored by the watcher (exp: "/**/node_modules/*").
+        - ignore: the ignored paths resource is used to configure the watcher by specifying local paths to be ignored by the
+            watcher (exp: "/**/node_modules/*").
               "watchkube ignore add [path]" : add a new ignored path.
               "watchkube ignore list" : list all ignored paths.
               "watchkube ignore remove [id]" : remove an ignored path.
@@ -60,7 +62,7 @@ const configManagerLog = (op) => {
     remove: 'The specified config was removed successfully',
     configNotFound: 'Error: config not found',
     noConfigs: 'No configs found, please use "watchkube config add" to add new config',
-    createWrongArgs: 'Wrong arguments, please provide: [localDir] [remoteDir] [selector] [container], where container is optional',
+    createWrongArgs: 'Wrong arguments, please provide: [localDir] [remoteDir] -s [selector] -c [container] -n [namespace], where container and namepace are optionals',
     removeWrongArgs: 'Wrong arguments, please provide: id',
     invalidId: 'Please provide a valid id',
   };
