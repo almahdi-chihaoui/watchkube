@@ -20,17 +20,23 @@ const {
 } = require('../../logger');
 
 const createConfig = (args) => {
+  let localDir = args[0];
+  const remoteDir = args[1];
+  const selectorOption = args.findIndex(arg => arg === '-s');
+  const containerNameOption = args.findIndex(arg => arg === '-c');
+  const nameSpaceOption = args.findIndex(arg => arg === '-n');
   if (
-    args[0]
-    && args[1]
-    && args[2]
+    localDir
+    && remoteDir
+    && selectorOption !== -1
   ) {
-    const localDir = args[0] === '.' ? process.cwd() : args[1];
-    const remoteDir = args[1];
-    const selector = args[2];
-    const containerName = args[3] || ''; 
+    localDir = args[0] === '.' ? process.cwd() : args[1];
+    const selector = args[selectorOption + 1];
+    const containerName = containerNameOption !== -1 ? args[containerNameOption + 1] : '';
+    const nameSpace = nameSpaceOption !== -1 ? args[nameSpaceOption + 1] : '';
 
-    createConfigData(selector, localDir, remoteDir, configData, dataFilePath, containerName);
+
+    createConfigData(selector, localDir, remoteDir, configData, dataFilePath, containerName, nameSpace);
   } else {
     configManagerLog('createWrongArgs');
   }
