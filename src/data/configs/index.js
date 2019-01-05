@@ -28,7 +28,9 @@ const createConfig = (args) => {
   if (
     localDir
     && remoteDir
-    && selectorOption !== -1
+    && selectorOption > 1
+    && (containerNameOption == -1 || containerNameOption > 1)
+    && (nameSpaceOption == -1 || nameSpaceOption > 1)
   ) {
     localDir = args[0] === '.' ? process.cwd() : args[1];
     const selector = args[selectorOption + 1];
