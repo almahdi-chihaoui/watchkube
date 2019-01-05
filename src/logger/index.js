@@ -11,7 +11,7 @@ const help = () => {
         - config: the config resource is used to configure the watcher by specifying pod selectors,
             local paths to watch as well as remote path inside the container of the targeted pod.
               "watchkube config add [localDir] [remoteDir] -s [selector] -c [container] -n [namespace]" : add a new config.
-                - [localDir] [remoteDir] -s [selector] are reauired.
+                - [localDir] [remoteDir] -s [selector] are required.
                 - if you don't specify a container, the first one will be selected.
                 - if you don't specify a namespace, the default namespace will be selected.
               "watchkube config list" : list all configs.

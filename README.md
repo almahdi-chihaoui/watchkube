@@ -90,7 +90,7 @@ To get all the commands:
               
         watchkube config add [localDir] [remoteDir] -s [selector] -c [container] -n [namespace] 
 
-    - [localDir] [remoteDir] -s [selector] are reauired.
+    - [localDir] [remoteDir] -s [selector] are required.
     - if you don't specify a container, the first one will      be selected.
     - if you don't specify a namespace, the default             namespace will be selected.
 
