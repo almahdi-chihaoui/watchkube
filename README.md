@@ -21,13 +21,13 @@ Check if it was installed properly:
 
 Configure watchkube by adding some configs:
 
-    watchkube config add app=frontend /path/to/frontend/project /remote/path
+    watchkube config add /path/to/frontend/project /remote/path -s app=frontend
 
-Here we specified the selector "app=frontend", local project's path (it needs to be asolute!) and the remote path inside the container running in the targeted pod.
+Here we specified the local project's path (it needs to be asolute!), the remote path inside the container running in the targeted pod and the selector "app=frontend".
 
 You can also change directory to your project's path and use the dot:
 
-    watchkube config add app=frontend . /remote/path
+    watchkube config add . /remote/path -s app=frontend
 
 List all configs:
 
@@ -63,6 +63,11 @@ https://github.com/almahdi-chihaoui/watchkube-demo-fe.git
 
 Change the API adress in the frontend app in src/index.js  to the adress of your kubernetes cluster (minikube ip) if you are using minikube.
 
+## Compatibility and prerequisites
+- A stable Node environment should be installed.
+- WatchKube is currently compatible with UNIX based systems, Windows support will be added soon.
+- A Kubernetes cluster (exp: minikube) and a configured kubectl CLI are required.
+
 ## API
 
 To get all the commands:
@@ -81,11 +86,15 @@ To get all the commands:
         
   - config: the config resource is used to configure the watcher by specifying pod selectors, local paths to watch as well as remote path inside the container of the targeted pod.
   
-      Add a new config:
+    Add a new config:
               
-        watchkube config add [selector] [localDir] [remoteDir] 
+        watchkube config add [localDir] [remoteDir] -s [selector] -c [container] -n [namespace] 
 
-      List all configs:
+    - [localDir] [remoteDir] -s [selector] are reauired.
+    - if you don't specify a container, the first one will      be selected.
+    - if you don't specify a namespace, the default             namespace will be selected.
+
+    List all configs:
 
         watchkube config list
 
