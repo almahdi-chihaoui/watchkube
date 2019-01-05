@@ -9,14 +9,14 @@ const {
   deleteFolder,
 } = require('./executeCmds');
 
-const updateKube = (os, event, selector, localPath, remotePath, containerName) => {
+const updateKube = (os, event, selector, localPath, remotePath, containerName, nameSpace) => {
   const platform = 'kubernetes';
   const mapEventsToCmds = {
-    change: () => execScriptFileCmd(os, applyChanges(platform, os, selector, localPath, remotePath, containerName)),
-    add: () => execScriptFileCmd(os, applyChanges(platform, os, selector, localPath, remotePath, containerName)),
-    unlink: () => execScriptFileCmd(os, deleteFile(platform, os, selector, remotePath, containerName)),
-    addDir: () => execScriptFileCmd(os, applyChanges(platform, os, selector, localPath, remotePath, containerName)),
-    unlinkDir: () => execScriptFileCmd(os, deleteFolder(platform, os, selector, remotePath, containerName)),
+    change: () => execScriptFileCmd(os, applyChanges(platform, os, selector, localPath, remotePath, containerName, nameSpace)),
+    add: () => execScriptFileCmd(os, applyChanges(platform, os, selector, localPath, remotePath, containerName, nameSpace)),
+    unlink: () => execScriptFileCmd(os, deleteFile(platform, os, selector, remotePath, containerName, nameSpace)),
+    addDir: () => execScriptFileCmd(os, applyChanges(platform, os, selector, localPath, remotePath, containerName, nameSpace)),
+    unlinkDir: () => execScriptFileCmd(os, deleteFolder(platform, os, selector, remotePath, containerName, nameSpace)),
   };
   return exec(mapEventsToCmds[event]());
 }
