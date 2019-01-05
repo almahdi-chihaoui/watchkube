@@ -23,15 +23,15 @@ const action = process.argv[3];
 const args = process.argv.slice(4);
 
 const main = {
-  config,
+  config: () => config(action, args),
   help,
-  ignore,
+  ignore: () => ignore(action, args),
   watch: startWatching,
   version: () => console.log(version),
 };
 
 if (Object.keys(main).includes(operation)) {
-  main[operation](action, args);
+  main[operation]();
 } else {
   unknownCmd(operation);
   return;
