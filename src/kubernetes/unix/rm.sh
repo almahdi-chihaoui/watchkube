@@ -6,8 +6,12 @@
 # $4: container name
 # $5: namespace
 
-# Get the pod's name from the selector $2
-POD_NAME="$(kubectl describe po -l $2 | grep ^Name: | head -1 | awk '{print $2}')"
+# Get the pod's name from the selector $2 and the namespace $5
+if [ -z $5 ]; then
+  POD_NAME="$(kubectl describe po -l $2 | grep ^Name: | head -1 | awk '{print $2}')"
+else
+  POD_NAME="$(kubectl describe po -l $2 -n $5 | grep ^Name: | head -1 | awk '{print $2}')"
+fi
 
 # We test if container name ($4) and namespace ($5) were given, and we execute the kubectl with otions -n
 # and -c accordingly
