@@ -1,4 +1,7 @@
 # WatchKube
+
+[![NPM](https://nodei.co/npm/watchkube.png)](https://www.npmjs.com/package/watchkube)
+
 WatchKube is a tool built with JavaScript that can speed up development process of applications that are running inside containers in a Kubernetes cluster.
 
 It watches your projects' local paths for changes, when you make some changes in one of your projects, it apply them to the container running inside a Kubernetes pod.
