@@ -1,4 +1,10 @@
 const assert = require('assert');
+const os = require('os');
+
+const {
+  configData,
+  dataFilePath,
+} = require('./configurations');
 
 const {
   createConfigData,
@@ -14,12 +20,9 @@ const {
   removeIgnoredPathData,
 } = require('../src/data/ignoredPaths/remove');
 
-
 const {
-  configData,
-  dataFilePath,
-} = require('./configurations');
-
+execScriptFileCmd,
+} = require('../src/kubernetes/executeCmds')
 describe('config', function() {
   describe('add', function() {
     it('config should be added', function() {
@@ -58,6 +61,25 @@ describe('ignore', function() {
       removeIgnoredPathData(1, data, dataFilePath);
       const newData = configData();
       assert.equal(newData.ignoredPaths.length, initialLength - 1);
+    });
+  });
+});
+
+describe('kubernetes', function() {
+  const osType = os.platform() !== 'win32' ? 'unix' : 'windows';
+  describe('execScriptFileCmd', function() {
+    it('it should return the command for running a script/batch file', function(done) {
+      const cmd = execScriptFileCmd(osType, 'scriptFile')
+      if (
+        osType === 'unix' && cmd === 'sh scriptFile'
+        ||
+        osType === 'windows' && 'scriptFile'
+      )
+      {
+        done();
+      } else {
+        done(error);
+      }
     });
   });
 });
