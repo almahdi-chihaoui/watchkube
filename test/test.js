@@ -93,6 +93,7 @@ describe('kubernetes', function() {
   describe('applyChanges', function() {
     it('it should return the command for applying changes', function(done) {
       const cmd = applyChanges(platform, osType, 'app=test', '/local/path/', '/remote/path', 'c1', 'ns');
+      console.log(cmd);
       console.log(`${MAIN_DIR}\\src\\kubernetes\\windows\\cp /local/path/ app=test /remote/path c1 ns`)
       if (
         osType === 'unix'
