@@ -124,4 +124,21 @@ describe('kubernetes', function() {
       }
     });
   });
+  describe('delete folder', function() {
+    it('it should return the command for deleting a folder', function(done) {
+      const cmd = deleteFolder(platform, osType, 'app=test', '/remote/path', 'c1', 'ns');
+      if (
+        osType === 'unix'
+          && cmd === `${MAIN_DIR}/src/kubernetes/unix/rm.sh fldr app=test /remote/path c1 ns`
+        ||
+        osType === 'windows'
+          && cmd === `${MAIN_DIR}\\src\\kubernetes\\windows\\rm fldr app=test /remote/path c1 ns`
+      )
+      {
+        done();
+      } else {
+        done(error);
+      }
+    });
+  });
 });
