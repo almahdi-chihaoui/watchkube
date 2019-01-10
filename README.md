@@ -1,4 +1,4 @@
-# WatchKube
+# WatchKube [![Yearly downloads](https://img.shields.io/npm/dy/watchkube.svg)](https://github.com/almahdi-chihaoui/watchkube) [![Mac/Linux Build Status](https://img.shields.io/travis/almahdi-chihaoui/watchkube/master.svg?label=Mac%20OSX%20%26%20Linux)](https://travis-ci.org/almahdi-chihaoui/watchkube)
 
 [![NPM](https://nodei.co/npm/watchkube.png)](https://www.npmjs.com/package/watchkube)
 
