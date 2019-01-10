@@ -7,6 +7,10 @@ const {
 } = require('./configurations');
 
 const {
+  MAIN_DIR,
+} = require('../settings')
+
+const {
   createConfigData,
 } = require('../src/data/configs/create');
 const {
@@ -21,7 +25,10 @@ const {
 } = require('../src/data/ignoredPaths/remove');
 
 const {
-execScriptFileCmd,
+  applyChanges,
+  execScriptFileCmd,
+  deleteFile,
+  deleteFolder,
 } = require('../src/kubernetes/executeCmds')
 describe('config', function() {
   describe('add', function() {
@@ -67,13 +74,31 @@ describe('ignore', function() {
 
 describe('kubernetes', function() {
   const osType = os.platform() !== 'win32' ? 'unix' : 'windows';
+  const platform = 'kubernetes';
   describe('execScriptFileCmd', function() {
     it('it should return the command for running a script/batch file', function(done) {
       const cmd = execScriptFileCmd(osType, 'scriptFile')
       if (
         osType === 'unix' && cmd === 'sh scriptFile'
         ||
-        osType === 'windows' && 'scriptFile'
+        osType === 'windows' && cmd === 'scriptFile'
+      )
+      {
+        done();
+      } else {
+        done(error);
+      }
+    });
+  });
+  describe('applyChanges', function() {
+    it('it should return the command for applying changes', function(done) {
+      const cmd = applyChanges(platform, osType, 'app=test', '/local/path/', '/remote/path', 'c1', 'ns');
+      if (
+        osType === 'unix'
+          && cmd === `${MAIN_DIR}/src/kubernetes/unix/cp.sh /local/path/ app=test /remote/path c1 ns`
+        ||
+        osType === 'windows'
+          && cmd === `${MAIN_DIR}\\src\\kubernetes\\windows\\cp /local/path/ app=test /remote/path c1 ns`
       )
       {
         done();
