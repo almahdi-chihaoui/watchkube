@@ -6,6 +6,15 @@ const {
 const {
   removeConfigData,
 } = require('../src/data/configs/remove');
+
+const {
+  createIgnoredPathData,
+} = require('../src/data/ignoredPaths/create');
+const {
+  removeIgnoredPathData,
+} = require('../src/data/ignoredPaths/remove');
+
+
 const {
   configData,
   dataFilePath,
@@ -28,6 +37,27 @@ describe('config', function() {
       removeConfigData(1, data, dataFilePath);
       const newData = configData();
       assert.equal(newData.configs.length, initialLength - 1);
+    });
+  });
+});
+
+describe('ignore', function() {
+  describe('add', function() {
+    it('ignored path should be added', function() {
+      const data = configData();
+      const initialLength = data.ignoredPaths.length;
+      createIgnoredPathData('/ignored/path/', data, dataFilePath);
+      const newData = configData();
+      assert.equal(newData.ignoredPaths.length, initialLength + 1);
+    });
+  });
+  describe('remove', function() {
+    it('ignored path should be removed', function() {
+      const data = configData();
+      const initialLength = data.ignoredPaths.length;
+      removeIgnoredPathData(1, data, dataFilePath);
+      const newData = configData();
+      assert.equal(newData.ignoredPaths.length, initialLength - 1);
     });
   });
 });
