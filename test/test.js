@@ -90,17 +90,32 @@ describe('kubernetes', function() {
       }
     });
   });
-  describe('applyChanges', function() {
+  describe('apply changes', function() {
     it('it should return the command for applying changes', function(done) {
       const cmd = applyChanges(platform, osType, 'app=test', '/local/path/', '/remote/path', 'c1', 'ns');
-      console.log(cmd);
-      console.log(`${MAIN_DIR}\\src\\kubernetes\\windows\\cp /local/path/ app=test /remote/path c1 ns`)
       if (
         osType === 'unix'
           && cmd === `${MAIN_DIR}/src/kubernetes/unix/cp.sh /local/path/ app=test /remote/path c1 ns`
         ||
         osType === 'windows'
           && cmd === `${MAIN_DIR}\\src\\kubernetes\\windows\\cp /local/path/ app=test /remote/path c1 ns`
+      )
+      {
+        done();
+      } else {
+        done(error);
+      }
+    });
+  });
+  describe('delete file', function() {
+    it('it should return the command for deleting a file', function(done) {
+      const cmd = deleteFile(platform, osType, 'app=test', '/remote/path', 'c1', 'ns');
+      if (
+        osType === 'unix'
+          && cmd === `${MAIN_DIR}/src/kubernetes/unix/rm.sh file app=test /remote/path c1 ns`
+        ||
+        osType === 'windows'
+          && cmd === `${MAIN_DIR}\\src\\kubernetes\\windows\\rm file app=test /remote/path c1 ns`
       )
       {
         done();
