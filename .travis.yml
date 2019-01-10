@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - '10'
+  - '8'
+  - '6'
+os:
+  - linux
+  - osx
+script:
+  - npm test
+sudo: false
