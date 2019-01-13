@@ -43,6 +43,7 @@ describe('config', function() {
       assert.equal(newData.configs[initialLength].selector, 'app=test');
       assert.equal(newData.configs[initialLength].containerName, 'container');
       assert.equal(newData.configs[initialLength].nameSpace, 'namespace');
+      assert.equal(newData.configs[initialLength].reload, true);
     });
   });
   describe('remove', function() {
