@@ -35,9 +35,14 @@ describe('config', function() {
     it('config should be added', function() {
       const data = configData();
       const initialLength = data.configs.length;
-      createConfigData('app=test', '/local/test/path/', '/remote/test/path/', data, dataFilePath);
+      createConfigData('app=test', '/local/test/path/', '/remote/test/path/', data, dataFilePath, 'container', 'namespace', true);
       const newData = configData();
       assert.equal(newData.configs.length, initialLength + 1);
+      assert.equal(newData.configs[initialLength].localDir, '/local/test/path/');
+      assert.equal(newData.configs[initialLength].remoteDir, '/remote/test/path/');
+      assert.equal(newData.configs[initialLength].selector, 'app=test');
+      assert.equal(newData.configs[initialLength].containerName, 'container');
+      assert.equal(newData.configs[initialLength].nameSpace, 'namespace');
     });
   });
   describe('remove', function() {
