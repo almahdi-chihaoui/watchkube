@@ -25,6 +25,8 @@ const createConfig = (args) => {
   const selectorOption = args.findIndex(arg => arg === '-s');
   const containerNameOption = args.findIndex(arg => arg === '-c');
   const nameSpaceOption = args.findIndex(arg => arg === '-n');
+  const reloadOption = args.findIndex(arg => arg === '-r');
+
   if (
     localDir
     && remoteDir
@@ -36,9 +38,9 @@ const createConfig = (args) => {
     const selector = args[selectorOption + 1];
     const containerName = containerNameOption !== -1 ? args[containerNameOption + 1] : '';
     const nameSpace = nameSpaceOption !== -1 ? args[nameSpaceOption + 1] : '';
+    const reload = reloadOption !== -1;
 
-
-    createConfigData(selector, localDir, remoteDir, configData, dataFilePath, containerName, nameSpace);
+    createConfigData(selector, localDir, remoteDir, configData, dataFilePath, containerName, nameSpace, reload);
   } else {
     configManagerLog('createWrongArgs');
   }
