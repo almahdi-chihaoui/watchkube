@@ -26,8 +26,8 @@ elif [ -n $4 ] && [ -n $5 ]; then
   kubectl cp $1 $POD_NAME:$3 -c $4 -n $5 || exit 1
 fi
 
-# Reload the container if reload ($6) is equal to -r
-if [ $6='-r' ]; then
+# Reload the container if reload ($6) is equal to "true"
+if [ $6="true" ]; then
   if [ -z $4 ] && [ -z $5 ]; then
     kubectl exec -it $POD_NAME -- /bin/sh -c "kill 1" || exit 1
   elif [ -n $4 ] && [ -z $5 ]; then
