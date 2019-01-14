@@ -54,6 +54,7 @@ const startWatching = () => {
         remotePath,
         targetPodconfig.containerName,
         targetPodconfig.nameSpace,
+        targetPodconfig.reload,
         )
         .on('close', (code) => {
           if (!code) {
