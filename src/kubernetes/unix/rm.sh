@@ -5,6 +5,7 @@
 # $3: remote path
 # $4: container name
 # $5: namespace
+# $6: reload
 
 # Get the pod's name from the selector $2 and the namespace $5
 if [ -z $5 ]; then
@@ -36,5 +37,18 @@ elif [ $1 = 'file' ]; then
     kubectl exec $POD_NAME -it -n $5 -- rm $3 || exit 1
   elif [ -n $4 ] && [ -n $5 ]; then
     kubectl exec $POD_NAME -it -c $4 -n $5 -- rm $3 || exit 1
+  fi
+fi
+
+# Reload the container if reload ($6) is equal to -r
+if [ $6='-r' ]; then
+  if [ -z $4 ] && [ -z $5 ]; then
+    kubectl exec -it $POD_NAME -- /bin/sh -c "kill 1" || exit 1
+  elif [ -n $4 ] && [ -z $5 ]; then
+    kubectl exec -it $POD_NAME -c $4 -- /bin/sh -c "kill 1" || exit 1
+  elif [ -z $4 ] && [ -n $5 ]; then
+    kubectl exec -it $POD_NAME -n $5 -- /bin/sh -c "kill 1" || exit 1
+  elif [ -n $4 ] && [ -n $5 ]; then
+    kubectl exec -it $POD_NAME -c $4 -n $5 -- /bin/sh -c "kill 1" || exit 1
   fi
 fi
