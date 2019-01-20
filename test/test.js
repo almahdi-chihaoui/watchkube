@@ -35,7 +35,7 @@ describe('config', function() {
     it('config should be added', function() {
       const data = configData();
       const initialLength = data.configs.length;
-      createConfigData('app=test', '/local/test/path/', '/remote/test/path/', data, dataFilePath, 'container', 'namespace', true);
+      createConfigData('app=test', '/local/test/path/', '/remote/test/path/', data, dataFilePath, 'container', 'namespace');
       const newData = configData();
       assert.equal(newData.configs.length, initialLength + 1);
       assert.equal(newData.configs[initialLength].localDir, '/local/test/path/');
@@ -43,7 +43,6 @@ describe('config', function() {
       assert.equal(newData.configs[initialLength].selector, 'app=test');
       assert.equal(newData.configs[initialLength].containerName, 'container');
       assert.equal(newData.configs[initialLength].nameSpace, 'namespace');
-      assert.equal(newData.configs[initialLength].reload, true);
     });
   });
   describe('remove', function() {
