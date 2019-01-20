@@ -44,7 +44,10 @@ const createConfigData = (
   }
 
   // Add the new config
-  const newConfigs = [...configData.configs, newConfig];
+  const newConfigs = [
+    ...configData.configs,
+    newConfig,
+  ];
   const newConfigData = {
     ...configData,
     configs: newConfigs,
