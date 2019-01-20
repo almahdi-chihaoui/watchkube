@@ -33,7 +33,6 @@ const createConfig = (args) => {
   const selectorOption = args.findIndex(arg => arg === '-s');
   const containerNameOption = args.findIndex(arg => arg === '-c');
   const nameSpaceOption = args.findIndex(arg => arg === '-n');
-  const reloadOption = args.findIndex(arg => arg === '-r');
 
   if (
     localDir
@@ -50,7 +49,6 @@ const createConfig = (args) => {
     const selector = args[selectorOption + 1];
     const containerName = containerNameOption !== -1 ? args[containerNameOption + 1] : '';
     const nameSpace = nameSpaceOption !== -1 ? args[nameSpaceOption + 1] : '';
-    const reload = reloadOption !== -1;
 
     // Add the new config
     createConfigData(
@@ -61,7 +59,6 @@ const createConfig = (args) => {
       dataFilePath,
       containerName,
       nameSpace,
-      reload,
     );
   } else {
     // Show wrong args message if some mandatory args are missing, or args are misplaced   
