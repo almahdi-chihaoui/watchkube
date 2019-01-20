@@ -3,7 +3,7 @@
 const path = require('path');
 
 const {
-  configData,
+  getConfigData,
   dataFilePath,
 } = require('../configurations');
 
@@ -38,6 +38,9 @@ const createIgnoredPath = (args) => {
       ? path.join(process.cwd(), args[0].slice(1))
       : args[0];
 
+    // Get configData
+    const configData = getConfigData();
+
     // Add the new ignored path  
     createIgnoredPathData(
       ignoredPath,
@@ -59,6 +62,9 @@ const removeIgnoredPath = (args) => {
   if (args.length === 1) {
     const id = Number(args[0]);
     if (!isNaN(id)) {
+      // Get configData
+      const configData = getConfigData();
+
       removeIgnoredPathData(id, configData, dataFilePath);
     } else {
       ignoredPathManagerLog('invalidId');
@@ -73,6 +79,9 @@ const removeIgnoredPath = (args) => {
  */
 
 const listIgnoredPaths = () => {
+  // Get configData
+  const configData = getConfigData();
+
   listIgnoredPathsData(configData);
 }
 

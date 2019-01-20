@@ -3,8 +3,12 @@
 const chokidar = require('chokidar');
 const os = require('os');
 
-const { configData } = require('./data/configurations');
-const { updateKube } = require('./kubernetes');
+const {
+  getConfigData,
+} = require('./data/configurations');
+const {
+  updateKube,
+} = require('./kubernetes');
 const {
   configManagerLog,
   errorsLog,
@@ -14,6 +18,9 @@ const {
 
 const startWatching = () => {
   const osType = os.platform() !== 'win32' ? 'unix' : 'windows';
+
+  // Get configData
+  const configData = getConfigData();
 
   const watchedPaths = configData.configs
     .map(cfg => cfg.localDir);

@@ -2,7 +2,7 @@
 
 const {
   dataFilePath,
-  configData,
+  getConfigData,
 } = require('../configurations');
 
 const {
@@ -44,11 +44,14 @@ const createConfig = (args) => {
     // When the dot is used, get the local path via process.cwd(),
     // which return the current working directory
     localDir = args[0] === '.' ? process.cwd() : args[1];
-    
+
     // Get the options' values
     const selector = args[selectorOption + 1];
     const containerName = containerNameOption !== -1 ? args[containerNameOption + 1] : '';
     const nameSpace = nameSpaceOption !== -1 ? args[nameSpaceOption + 1] : '';
+
+    // Get configData
+    const configData = getConfigData();
 
     // Add the new config
     createConfigData(
@@ -75,7 +78,14 @@ const removeConfig = (args) => {
   if (args.length === 1) {
     const id = Number(args[0]);
     if (!isNaN(id)) {
-      removeConfigData(id, configData, dataFilePath);
+      // Get configData
+      const configData = getConfigData();
+
+      removeConfigData(
+        id,
+        configData,
+        dataFilePath,
+      );
     } else {
       configManagerLog('invalidId');
     }
@@ -89,6 +99,9 @@ const removeConfig = (args) => {
  */
 
 const listConfigs = () => {
+  // Get configData
+  const configData = getConfigData();
+
   listConfigData(configData);
 }
 
