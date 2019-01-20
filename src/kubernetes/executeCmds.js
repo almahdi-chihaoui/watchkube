@@ -67,8 +67,8 @@ const deleteFolder = (
   nameSpace,
 ) => {
   const scriptFile = {
-    unix: 'rm.sh fldr',
-    windows: 'rm fldr',
+    unix: 'rm.sh',
+    windows: 'rm',
   }
   return path.join(MAIN_DIR, `/src/${platform}/${os}/${scriptFile[os]}`)
     + buildArg('-s', selector)
