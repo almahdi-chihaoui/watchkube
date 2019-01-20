@@ -1,40 +1,78 @@
 #!/bin/bash
 
-# $1: local path
-# $2: selector
-# $3: remote path
-# $4: container name
-# $5: namespace
-# $6: reload
+# -ldir: local path
+# -rdir: remote path
+# -s: selector 
+# -c: container name
+# -n: namespace
 
-# Get the pod's name from the selector $2 and the namespace $5
-if [ -z $5 ]; then
-  POD_NAME="$(kubectl describe po -l $2 | grep ^Name: | head -1 | awk '{print $2}')"
+LOCAL_DIR=""
+REMOTE_DIR=""
+SELECTOR=""
+CONTAINER_NAME=""
+NAMESPACE=""
+
+# Get values from options
+while [ -n "$1" ]; do 
+ 
+    case "$1" in
+ 
+    -ldir)
+        param="$2"
+        LOCAL_DIR=$param
+ 
+        shift
+        ;;
+
+    -rdir)
+        param="$2"
+        REMOTE_DIR=$param
+ 
+        shift
+        ;;
+ 
+    -s)
+        param="$2"
+        SELECTOR=$param
+ 
+        shift
+        ;;
+
+    -c)
+        param="$2"
+        CONTAINER_NAME=$param
+ 
+        shift
+        ;;
+
+    -n)
+        param="$2"
+        NAMESPACE=$param
+        ;;
+ 
+    *) echo "Option $1 not recognized" ;;
+ 
+    esac
+ 
+    shift
+ 
+done
+
+# Get the pod's name from the selector $SELECTOR and the namespace $NAMESPACE
+if [ -z $NAMESPACE ]; then
+  POD_NAME="$(kubectl describe po -l $SELECTOR | grep ^Name: | head -1 | awk '{print $2}')"
 else
-  POD_NAME="$(kubectl describe po -l $2 -n $5 | grep ^Name: | head -1 | awk '{print $2}')"
+  POD_NAME="$(kubectl describe po -l $SELECTOR -n $NAMESPACE | grep ^Name: | head -1 | awk '{print $2}')"
 fi
 
-# We test if container name ($4) and namespace ($5) were given, and we execute the kubectl with otions -n
+# We test if container name ($CONTAINER_NAME) and namespace ($NAMESPACE) were given, and we execute the kubectl with otions -n
 # and -c accordingly
-if [ -z $4 ] && [ -z $5 ]; then
-  kubectl cp $1 $POD_NAME:$3 || exit 1
-elif [ -n $4 ] && [ -z $5 ]; then
-  kubectl cp $1 $POD_NAME:$3 -c $4 || exit 1
-elif [ -z $4 ] && [ -n $5 ]; then
-  kubectl cp $1 $POD_NAME:$3 -n $5 || exit 1
-elif [ -n $4 ] && [ -n $5 ]; then
-  kubectl cp $1 $POD_NAME:$3 -c $4 -n $5 || exit 1
-fi
-
-# Reload the container if reload ($6) is equal to "true"
-if [ $6="true" ]; then
-  if [ -z $4 ] && [ -z $5 ]; then
-    kubectl exec -it $POD_NAME -- /bin/sh -c "kill 1" || exit 1
-  elif [ -n $4 ] && [ -z $5 ]; then
-    kubectl exec -it $POD_NAME -c $4 -- /bin/sh -c "kill 1" || exit 1
-  elif [ -z $4 ] && [ -n $5 ]; then
-    kubectl exec -it $POD_NAME -n $5 -- /bin/sh -c "kill 1" || exit 1
-  elif [ -n $4 ] && [ -n $5 ]; then
-    kubectl exec -it $POD_NAME -c $4 -n $5 -- /bin/sh -c "kill 1" || exit 1
-  fi
+if [ -z $CONTAINER_NAME ] && [ -z $NAMESPACE ]; then
+  kubectl cp $LOCAL_DIR $POD_NAME:$REMOTE_DIR || exit 1
+elif [ -n $CONTAINER_NAME ] && [ -z $NAMESPACE ]; then
+  kubectl cp $LOCAL_DIR $POD_NAME:$REMOTE_DIR -c $CONTAINER_NAME || exit 1
+elif [ -z $CONTAINER_NAME ] && [ -n $NAMESPACE ]; then
+  kubectl cp $LOCAL_DIR $POD_NAME:$REMOTE_DIR -n $NAMESPACE || exit 1
+elif [ -n $CONTAINER_NAME ] && [ -n $NAMESPACE ]; then
+  kubectl cp $LOCAL_DIR $POD_NAME:$REMOTE_DIR -c $CONTAINER_NAME -n $NAMESPACE || exit 1
 fi
