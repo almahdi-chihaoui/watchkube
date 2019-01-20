@@ -8,8 +8,13 @@ const {
 } = require('../../settings');
 
 const dataFilePath = path.join(MAIN_DIR, '/src/data/data/data.json');
-const dataFile = fs.readFileSync(dataFilePath);
-const configData = JSON.parse(dataFile);
+
+/**
+ * Get the data file (data.json) content parsed in JSON object.
+ */
+
+const configData = () =>
+  (JSON.parse(fs.readFileSync(dataFilePath)));
 
 
 module.exports = {
