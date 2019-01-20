@@ -55,7 +55,8 @@ const updateKube = (
     addDir: () => execScriptFileCmd(
       os,
       applyChanges(platform,
-        os, selector,
+        os,
+        selector,
         ocalPath,
         remotePath,
         containerName,
