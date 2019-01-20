@@ -101,10 +101,10 @@ describe('kubernetes', function() {
       const cmd = applyChanges(platform, osType, 'app=test', '/local/path/', '/remote/path', 'c1', 'ns');
       if (
         osType === 'unix'
-          && cmd === `${MAIN_DIR}/src/kubernetes/unix/cp.sh /local/path/ app=test /remote/path c1 ns`
+          && cmd === `${MAIN_DIR}/src/kubernetes/unix/cp.sh -ldir /local/path/ -s app=test -rdir /remote/path -c c1 -n ns`
         ||
         osType === 'windows'
-          && cmd === `${MAIN_DIR}\\src\\kubernetes\\windows\\cp /local/path/ app=test /remote/path c1 ns`
+          && cmd === `${MAIN_DIR}\\src\\kubernetes\\windows\\cp -ldir /local/path/ -s app=test -rdir /remote/path -c c1 -n ns`
       )
       {
         done();
@@ -118,10 +118,10 @@ describe('kubernetes', function() {
       const cmd = deleteFile(platform, osType, 'app=test', '/remote/path', 'c1', 'ns');
       if (
         osType === 'unix'
-          && cmd === `${MAIN_DIR}/src/kubernetes/unix/rm.sh file app=test /remote/path c1 ns`
+          && cmd === `${MAIN_DIR}/src/kubernetes/unix/rm.sh -s app=test -rdir /remote/path -c c1 -n ns`
         ||
         osType === 'windows'
-          && cmd === `${MAIN_DIR}\\src\\kubernetes\\windows\\rm file app=test /remote/path c1 ns`
+          && cmd === `${MAIN_DIR}\\src\\kubernetes\\windows\\rm -s app=test -rdir /remote/path -c c1 -n ns`
       )
       {
         done();
@@ -135,10 +135,10 @@ describe('kubernetes', function() {
       const cmd = deleteFolder(platform, osType, 'app=test', '/remote/path', 'c1', 'ns');
       if (
         osType === 'unix'
-          && cmd === `${MAIN_DIR}/src/kubernetes/unix/rm.sh fldr app=test /remote/path c1 ns`
+          && cmd === `${MAIN_DIR}/src/kubernetes/unix/rm.sh -s app=test -rdir /remote/path -c c1 -n ns -rmdir`
         ||
         osType === 'windows'
-          && cmd === `${MAIN_DIR}\\src\\kubernetes\\windows\\rm fldr app=test /remote/path c1 ns`
+          && cmd === `${MAIN_DIR}\\src\\kubernetes\\windows\\rm -s app=test -rdir /remote/path -c c1 -n ns -rmdir`
       )
       {
         done();
