@@ -6,7 +6,15 @@ const {
   configManagerLog,
 } = require('../../logger');
 
-const createConfigData = (selector, localDir, remoteDir, configData, dataFilePath, containerName, nameSpace, reload) => {
+const createConfigData = (
+  selector,
+  localDir,
+  remoteDir,
+  configData,
+  dataFilePath,
+  containerName,
+  nameSpace,
+) => {
   const newId = configData.configs.length > 0
     ? configData.configs.reduce((prev, curr) => {
       return curr.id > prev.id ? curr : prev;
@@ -19,7 +27,6 @@ const createConfigData = (selector, localDir, remoteDir, configData, dataFilePat
     remoteDir,
     containerName,
     nameSpace,
-    reload,
   }
 
   const newConfigs = [...configData.configs, newConfig];
