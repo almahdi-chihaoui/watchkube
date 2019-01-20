@@ -8,7 +8,7 @@ const {
 
 /**
  * Remove a config by id.
- * @param {number} id - The id of the config to e removed.
+ * @param {number} id - The id of the config to be removed.
  * @param {Object} configData - The data file (data.json) content parsed in JSON object.
  * @param {string} dataFilePath - The path of the data file (data.json).
  */
