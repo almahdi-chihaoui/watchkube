@@ -14,8 +14,8 @@ const {
  * @param {string} os - The current OS.
  * @param {string} event - The watcher event.
  * @param {string} selector - The pod selector.
- * @param {string} localPath - Local directory, which is the path of the sevice's project.
- * @param {string} remotePath - Remote directory, which is the path where the project is hosted in the cotainer.
+ * @param {string} localPath - Local path of the modified file.
+ * @param {string} remotePath - Remote path of the modified file.
  * @param {string} containerName - The name of the targeted container (for pod with multiple containers).
  * @param {string} nameSpace - The targeted namespace.
  */
