@@ -3,11 +3,12 @@
 const {
   unknownCmd,
 } = require('./logger');
+
 const {
   createIgnoredPath,
   listIgnoredPaths,
   removeIgnoredPath,
-} = require('./data/ignoredPaths'); 
+} = require('./data/ignoredPaths');
 
 /**
  * Create, list or remove ignored paths data based on the given action.
@@ -21,6 +22,7 @@ const ignore = (action, args) => {
     list: listIgnoredPaths,
     remove: removeIgnoredPath,
   }
+
   if (Object.keys(actions).includes(action)) {
     // Execute the appropriate function
     return actions[action](args);

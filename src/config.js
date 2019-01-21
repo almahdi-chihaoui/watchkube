@@ -7,7 +7,7 @@ const {
   createConfig,
   listConfigs,
   removeConfig,
-} = require('./data/configs'); 
+} = require('./data/configs');
 
 /**
  * Create, list or remove configs data based on the given action.
@@ -22,7 +22,7 @@ const config = (action, args) => {
     remove: removeConfig,
   }
   if (Object.keys(actions).includes(action)) {
-     // Execute the appropriate function
+    // Execute the appropriate function
     return actions[action](args);
   } else {
     // Show unknown command error if the given action is not found in the actions object
