@@ -73,22 +73,22 @@ fi
 # If the target is a folder, we use rm -r to remove the folder and its content, if it is a file we use rm
 if [ $RMDIR = true ]; then
   if [ -z $CONTAINER_NAME ] && [ -z $NAMESPACE ]; then
-    kubectl exec $POD_NAME -it -- rm -r $3 || exit 1
+    kubectl exec $POD_NAME -it -- rm -r $REMOTE_DIR || exit 1
   elif [ -n $CONTAINER_NAME ] && [ -z $NAMESPACE ]; then
-    kubectl exec $POD_NAME -it -c $CONTAINER_NAME -- rm -r $3 || exit 1
+    kubectl exec $POD_NAME -it -c $CONTAINER_NAME -- rm -r $REMOTE_DIR || exit 1
   elif [ -z $CONTAINER_NAME ] && [ -n $NAMESPACE ]; then
-    kubectl exec $POD_NAME -it -n $NAMESPACE -- rm -r $3 || exit 1
+    kubectl exec $POD_NAME -it -n $NAMESPACE -- rm -r $REMOTE_DIR || exit 1
   elif [ -n $CONTAINER_NAME ] && [ -n $NAMESPACE ]; then
-    kubectl exec $POD_NAME -it -c $CONTAINER_NAME -n $NAMESPACE -- rm -r $3 || exit 1
+    kubectl exec $POD_NAME -it -c $CONTAINER_NAME -n $NAMESPACE -- rm -r $REMOTE_DIR || exit 1
   fi
 else
   if [ -z $CONTAINER_NAME ] && [ -z $NAMESPACE ]; then
-    kubectl exec $POD_NAME -it -- rm $3 || exit 1
+    kubectl exec $POD_NAME -it -- rm $REMOTE_DIR || exit 1
   elif [ -n $CONTAINER_NAME ] && [ -z $NAMESPACE ]; then
-    kubectl exec $POD_NAME -it -c $CONTAINER_NAME -- rm $3 || exit 1
+    kubectl exec $POD_NAME -it -c $CONTAINER_NAME -- rm $REMOTE_DIR || exit 1
   elif [ -z $CONTAINER_NAME ] && [ -n $NAMESPACE ]; then
-    kubectl exec $POD_NAME -it -n $NAMESPACE -- rm $3 || exit 1
+    kubectl exec $POD_NAME -it -n $NAMESPACE -- rm $REMOTE_DIR || exit 1
   elif [ -n $CONTAINER_NAME ] && [ -n $NAMESPACE ]; then
-    kubectl exec $POD_NAME -it -c $CONTAINER_NAME -n $NAMESPACE -- rm $3 || exit 1
+    kubectl exec $POD_NAME -it -c $CONTAINER_NAME -n $NAMESPACE -- rm $REMOTE_DIR || exit 1
   fi
 fi
