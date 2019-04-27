@@ -12,6 +12,10 @@ const {
 } = require('./saveData');
 
 const {
+  validate,
+} = require('../validation');
+
+const {
   errorsLog,
   importManagerLog,
 } = require('../../logger')
@@ -27,19 +31,31 @@ const importFile = (filePath) => {
   if (fs.existsSync(filePath)) {
     // Get new configData from the file's path
     const newConfigData = getConfigData(filePath);
-    // Get configData
-    const configData = getConfigData();
-    // Validate
 
-    // Save
-    saveData(
-      newConfigData.configs,
-      newConfigData.ignoredPaths,
-      configData,
-      dataFilePath,
-    );
-    importManagerLog('importFile');
+    // Validate
+    const validationResult = validate(newConfigData);
+
+    if (validationResult.error === null) {
+      // Get configData
+      const configData = getConfigData();
+
+      // Save
+      saveData(
+        newConfigData.configs,
+        newConfigData.ignoredPaths,
+        configData,
+        dataFilePath,
+      );
+
+      // Log success message
+      importManagerLog('importFile');
+    } else {
+      // Log error message
+      errorsLog('validation', validationResult.error);
+    }
+
   } else {
+    // Log error message
     errorsLog('importFile', filePath);
   }
 }

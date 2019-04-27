@@ -52,7 +52,8 @@ const errorsLog = (errorSide, detail) => {
   const messages = {
     watch: `Something went wrong :( error: ${detail}`,
     update: `Something went wrong :(\nChanges may not been applied!\nCode: ${detail}`,
-    importFile: `${detail} does not exist! import aborted.`
+    importFile: `${detail} does not exist! import aborted.`,
+    validation: `Oops, something is wrong :/\n${detail}`,
   };
   console.log(`\x1b[31m${messages[errorSide]}`);
 }
