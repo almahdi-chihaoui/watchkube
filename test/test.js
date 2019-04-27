@@ -121,28 +121,6 @@ describe('importFile', function () {
       assert.equal(newData.ignoredPaths[newData.ignoredPaths.length - 1].path, addedIgnoredPath[0].path);
     });
   });
-  describe('import', function () {
-    it('file should be imported', function () {
-      const data = configData();
-      const initialIgnoredPathsLength = data.ignoredPaths.length;
-      const initialConfigsLength = data.configs.length;
-
-      const testFilePath = path.join(MAIN_DIR, '/test/assets/test.json');
-
-      importFile(testFilePath);
-
-      const newData = configData();
-
-      assert.equal(newData.ignoredPaths.length, initialIgnoredPathsLength + 1);
-      assert.equal(newData.configs.length, initialConfigsLength + 1);
-      assert.equal(newData.configs[newData.configs.length - 1].selector, addedConfigs[0].selector);
-      assert.equal(newData.configs[newData.configs.length - 1].localDir, addedConfigs[0].localDir);
-      assert.equal(newData.configs[newData.configs.length - 1].remoteDir, addedConfigs[0].remoteDir);
-      assert.equal(newData.configs[newData.configs.length - 1].containerName, addedConfigs[0].containerName);
-      assert.equal(newData.configs[newData.configs.length - 1].nameSpace, addedConfigs[0].nameSpace);
-      assert.equal(newData.ignoredPaths[newData.ignoredPaths.length - 1].path, addedIgnoredPath[0].path);
-    });
-  });
 });
 
 describe('kubernetes', function () {
