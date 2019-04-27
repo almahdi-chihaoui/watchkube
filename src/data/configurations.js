@@ -13,8 +13,8 @@ const dataFilePath = path.join(MAIN_DIR, '/src/data/data/data.json');
  * Get the data file (data.json) content parsed in JSON object.
  */
 
-const getConfigData = () =>
-  (JSON.parse(fs.readFileSync(dataFilePath)));
+const getConfigData = (path = dataFilePath) =>
+  (JSON.parse(fs.readFileSync(path)));
 
 
 module.exports = {

@@ -15,6 +15,10 @@ const {
 } = require('./src/ignore')
 
 const {
+  importFile,
+} = require('./src/data/importFile')
+
+const {
   startWatching,
 } = require('./src/watch')
 
@@ -29,6 +33,7 @@ const args = process.argv.slice(4);
 
 // Map commands with functions
 const main = {
+  import: () => importFile(process.argv[3]),
   config: () => config(action, args),
   help,
   ignore: () => ignore(action, args),
