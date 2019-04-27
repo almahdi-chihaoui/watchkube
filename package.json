@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/almahdi-chihaoui/watchkube#readme",
   "dependencies": {
+    "@hapi/joi": "^15.0.0",
     "chokidar": "^2.0.4",
     "console.table": "^0.10.0"
   },
