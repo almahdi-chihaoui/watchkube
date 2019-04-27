@@ -52,8 +52,16 @@ const errorsLog = (errorSide, detail) => {
   const messages = {
     watch: `Something went wrong :( error: ${detail}`,
     update: `Something went wrong :(\nChanges may not been applied!\nCode: ${detail}`,
+    importFile: `${detail} does not exist! import aborted.`
   };
   console.log(`\x1b[31m${messages[errorSide]}`);
+}
+
+const importManagerLog = (op) => {
+  const messages = {
+    importFile: 'The file was imported successfully',
+  };
+  console.log(`${messages[op]}`);
 }
 
 const configManagerLog = (op) => {
@@ -94,6 +102,7 @@ module.exports = {
   configManagerLog,
   help,
   ignoredPathManagerLog,
+  importManagerLog,
   errorsLog,
   statusLog,
   unknownCmd,

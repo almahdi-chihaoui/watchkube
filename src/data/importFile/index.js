@@ -1,5 +1,7 @@
 'use strict'
 
+const fs = require('fs');
+
 const {
   dataFilePath,
   getConfigData,
@@ -9,27 +11,37 @@ const {
   saveData
 } = require('./saveData');
 
+const {
+  errorsLog,
+  importManagerLog,
+} = require('../../logger')
+
 /**
  * Import configs and ignored paths from a file.
  * @param {string} filePath 
  */
 
 const importFile = (filePath) => {
-  // Get configData
-  const configData = getConfigData();
+  // Check if the file exist
 
-  // Get new configData from the file's path
-  const newConfigData = getConfigData(filePath);
+  if (fs.existsSync(filePath)) {
+    // Get new configData from the file's path
+    const newConfigData = getConfigData(filePath);
+    // Get configData
+    const configData = getConfigData();
+    // Validate
 
-  // Validate
-
-  // Save
-  saveData(
-    newConfigData.configs,
-    newConfigData.ignoredPaths,
-    configData,
-    dataFilePath,
-  );
+    // Save
+    saveData(
+      newConfigData.configs,
+      newConfigData.ignoredPaths,
+      configData,
+      dataFilePath,
+    );
+    importManagerLog('importFile');
+  } else {
+    errorsLog('importFile', filePath);
+  }
 }
 
 module.exports = {
