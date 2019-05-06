@@ -1,7 +1,9 @@
 'use strict'
 
 const chokidar = require('chokidar');
+const fs = require('fs');
 const os = require('os');
+const path = require('path');
 
 const {
   getConfigData,
@@ -16,15 +18,28 @@ const {
   watchLog,
 } = require('./logger');
 
+const {
+  CONFIG_FILE_NAME,
+} = require('../settings');
+
 /**
  * Initialize and start the watcher.
  */
 
-const startWatching = () => {
+const startWatching = (path) => {
   const osType = os.platform() !== 'win32' ? 'unix' : 'windows';
 
-  // Get configData
-  const configData = getConfigData();
+  // Initialize config file path & configData
+  const configFilePath = path || process.cwd;
+  const configData = {};
+
+
+  // Check if there is watchkube.json file in current directory
+  if (fs.existsSync(path.join(configFilePath, CONFIG_FILE_NAME))) {
+    configData = getConfigData(path.join(configFilePath, CONFIG_FILE_NAME));
+  } else {
+    configData = getConfigData();
+  }
 
   // Get the paths to be watched
   const watchedPaths = configData.configs

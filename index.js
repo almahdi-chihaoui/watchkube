@@ -37,7 +37,7 @@ const main = {
   config: () => config(action, args),
   help,
   ignore: () => ignore(action, args),
-  watch: startWatching,
+  watch: startWatching(process.argv[3]),
   version: () => console.log(version),
 };
 

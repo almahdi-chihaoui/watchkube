@@ -1,5 +1,6 @@
 'use strict'
 
 module.exports = {
-  MAIN_DIR : __dirname
+  CONFIG_FILE_NAME: '/watchkube.json',
+  MAIN_DIR: __dirname,
 };
