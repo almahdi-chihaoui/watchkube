@@ -26,17 +26,18 @@ const {
  * Initialize and start the watcher.
  */
 
-const startWatching = (path) => {
+const startWatching = (inputPath) => {
   const osType = os.platform() !== 'win32' ? 'unix' : 'windows';
 
   // Initialize config file path & configData
-  const configFilePath = path || process.cwd;
-  const configData = {};
+  const configFilePath = inputPath || process.cwd();
+  let configData = {};
 
 
   // Check if there is watchkube.json file in current directory
   if (fs.existsSync(path.join(configFilePath, CONFIG_FILE_NAME))) {
     configData = getConfigData(path.join(configFilePath, CONFIG_FILE_NAME));
+    console.log('config file exist');
   } else {
     configData = getConfigData();
   }
