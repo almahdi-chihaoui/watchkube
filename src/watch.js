@@ -17,6 +17,9 @@ const {
   statusLog,
   watchLog,
 } = require('./logger');
+const {
+  validate,
+} = require('./data/validation');
 
 const {
   CONFIG_FILE_NAME,
@@ -38,6 +41,14 @@ const startWatching = (inputPath) => {
   if (fs.existsSync(path.join(configFilePath, CONFIG_FILE_NAME))) {
     configData = getConfigData(path.join(configFilePath, CONFIG_FILE_NAME));
     console.log('config file exist');
+
+    // Validate
+    const validationResult = validate(configData);
+    if (validationResult.error !== null) {
+      // Log error message
+      errorsLog('validation', validationResult.error);
+      return;
+    }
   } else {
     configData = getConfigData();
   }
@@ -57,7 +68,7 @@ const startWatching = (inputPath) => {
 
   // By default, all dotfiles/folders are ignored
   const ignored = [/(^|[\/\\])\../, ...ignoredPaths];
-  
+
   // Initialize and create a Chokidar watcher
   statusLog('initializing');
   const watcher = chokidar.watch(
@@ -92,7 +103,7 @@ const startWatching = (inputPath) => {
         remotePath,
         targetPodconfig.containerName,
         targetPodconfig.nameSpace,
-        )
+      )
         .on('close', (code) => {
           if (!code) {
             // Show a confirmation message
