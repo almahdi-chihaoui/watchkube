@@ -6,8 +6,8 @@ const configSchema = Joi.object().keys({
     localDir: Joi.string().required(),
     remoteDir: Joi.string().required(),
     selector: Joi.string().required(),
-    containerName: Joi.string(),
-    nameSpace: Joi.string(),
+    containerName: Joi.string().allow(''),
+    nameSpace: Joi.string().allow(''),
 });
 
 const ignoredPathSchema = Joi.object().keys({
