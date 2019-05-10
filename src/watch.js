@@ -40,7 +40,7 @@ const startWatching = (inputPath) => {
   // Check if there is watchkube.json file in current directory
   if (fs.existsSync(path.join(configFilePath, CONFIG_FILE_NAME))) {
     configData = getConfigData(path.join(configFilePath, CONFIG_FILE_NAME));
-    console.log('config file exist');
+    statusLog('usingConfigFile');
 
     // Validate
     const validationResult = validate(configData);
@@ -50,6 +50,7 @@ const startWatching = (inputPath) => {
       return;
     }
   } else {
+    statusLog('usingLocalFile');
     configData = getConfigData();
   }
 

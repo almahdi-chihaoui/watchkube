@@ -1,5 +1,9 @@
 'use strict'
 
+const {
+  CONFIG_FILE_NAME,
+} = require('../../settings')
+
 const help = () => {
   const helpText =
   `  */ To start the watcher: "watchkube watch" 
@@ -40,6 +44,8 @@ const watchLog = (event, path) => {
 
 const statusLog = (status) => {
   const messages = {
+    usingConfigFile: `Configuration file exist, using ${CONFIG_FILE_NAME.slice(1)} ...`,
+    usingLocalFile: `Configuration file does not exist, using local configuration ...`,
     initializing: '\x1b[33mInitializing ...',
     updating: '\x1b[32mUpdating ... >_<',
     updated: '\x1b[32mUpdated     -_-',
