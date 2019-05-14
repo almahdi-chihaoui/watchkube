@@ -28,7 +28,8 @@
   "dependencies": {
     "@hapi/joi": "^15.0.0",
     "chokidar": "^2.0.4",
-    "console.table": "^0.10.0"
+    "console.table": "^0.10.0",
+    "rimraf": "^2.6.3"
   },
   "devDependencies": {
     "mocha": "^5.2.0"
