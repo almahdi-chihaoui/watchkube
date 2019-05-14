@@ -1,8 +1,10 @@
 {
   "name": "watchkube",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "WatchKube is a tool built with JavaScript that can speed up development process of applications that are running inside containers in a Kubernetes cluster.",
   "scripts": {
+    "postinstall": "node ./scripts/postInstall.js",
+    "preuninstall": "node ./scripts/preUninstall.js",
     "test": "mocha"
   },
   "repository": {
