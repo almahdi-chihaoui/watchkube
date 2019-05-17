@@ -6,13 +6,17 @@ const {
 
 const help = () => {
   const helpText =
-  `  */ To start the watcher: "watchkube watch" 
+  `  */ To start the watcher : "watchkube watch" 
+  Here Watchkube will look for a configuration file named "watchkube.json" in the current directory to use it, if it does 
+  not exist, it will use its local stored configurations.
+  If that file is located else where use :
+      "watchkube watch [path_to_config_file]"
 
-  */ To configure the watcher, You need to specify the resource to confgiure and the action:
+  */ To configure the watcher, You need to specify the resource to confgiure and the action :
       "watchkube [resource] [action] [args]"
 
-      **/ Resources:
-        - config: the config resource is used to configure the watcher by specifying pod selectors,
+      **/ Resources :
+        - config : the config resource is used to configure the watcher by specifying pod selectors,
             local paths to watch as well as remote path inside the container of the targeted pod.
               "watchkube config add [localDir] [remoteDir] -s [selector] -c [container] -n [namespace]" : add a new config.
                 - [localDir] [remoteDir] -s [selector] are required.
@@ -21,13 +25,16 @@ const help = () => {
               "watchkube config list" : list all configs.
               "watchkube config remove [id]" : remove a config.
 
-        - ignore: the ignored paths resource is used to configure the watcher by specifying local paths to be ignored by the
+        - ignore : the ignored paths resource is used to configure the watcher by specifying local paths to be ignored by the
             watcher (exp: "/**/node_modules/*").
               "watchkube ignore add [path]" : add a new ignored path.
               "watchkube ignore list" : list all ignored paths.
               "watchkube ignore remove [id]" : remove an ignored path.
 
-  More info and demo: https://github.com/almahdi-chihaoui/watchkube#readme`;
+  */ To import a configuration file :
+      "watchkube import [path_to_config_file]"
+
+  More info and demo : https://github.com/almahdi-chihaoui/watchkube#readme`;
   console.log(helpText);
 }
 
