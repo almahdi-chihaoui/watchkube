@@ -54,7 +54,9 @@ Start watchkube:
 
 And now, you can forget about Docker and Kubernetes and focus on your work :)
 
-## Demo 
+> You can skip the configuration process by using your own configuration file. (see API and Configurations file schema sections below)
+
+## Demo (V 1.0.1)
 
 You can watch the full demo here: https://youtu.be/lqC22IdSFp8.
 
@@ -81,15 +83,19 @@ To get all the commands:
     
     watchkube watch
 
+  > Here Watchkube will look for a configuration file named "watchkube.json" in the current directory to use it, if it does not exist, it will use its local stored configurations. If that file is located else where use:
+
+    watchkube watch [path_to_config_file] 
+
 */ To configure the watcher, You need to specify the resource to confgiure and the action:
 
       watchkube [resource] [action] [args]
 
-  **/ Resources:
+  **/ Resources :
         
   - config: the config resource is used to configure the watcher by specifying pod selectors, local paths to watch as well as remote path inside the container of the targeted pod.
   
-    Add a new config:
+    Add a new config :
               
         watchkube config add [localDir] [remoteDir] -s [selector] -c [container] -n [namespace] 
 
@@ -97,34 +103,59 @@ To get all the commands:
     - if you don't specify a container, the first one will      be selected.
     - if you don't specify a namespace, the default             namespace will be selected.
 
-    List all configs:
+    List all configs :
 
         watchkube config list
 
-      Remove a config:
+      Remove a config :
 
         watchkube config remove [id]
 
   - ignore: the ignored paths resource is used to configure the watcher by specifying local paths to be ignored by the watcher (exp: "/**/node_modules/*").
 
-      Add a new ignored path:
+      Add a new ignored path :
 
         watchkube ignore add [path]
         
-      List all ignored paths:
+      List all ignored paths :
 
         watchkube ignore list
 
-      Remove an ignored path:
+      Remove an ignored path :
         
         watchkube ignore remove [id]
 
+/* To import a configuration file :
+    
+    watchkube import [path_to_config_file]
+
+## Configurations file schema:
+Configurations file is a JSON file that can be imported and added to Watchkube configurations or used to start Watchkube, in which case, Watchkube will only use the configurations in that file that should be named "watchkube.json".
+
+In order to be validated correctly, the configuration file should follow this schema :
+
+    {
+      "configs": [
+        {
+          "selector": "String",
+          "localDir": "String",
+          "remoteDir": "String",
+          "containerName": "String",
+          "nameSpace": "String"
+        },
+      ],
+      "ignoredPaths": [
+        {
+          "path": "String"
+        },
+      ]
+    }
 
 ## License
 
 The MIT License (MIT)
 
-Copyright (c) 2018 Mahdi Chihaoui (https://www.linkedin.com/in/al-mahdi-chihaoui/)
+Copyright (c) 2019 Mahdi Chihaoui (https://www.linkedin.com/in/al-mahdi-chihaoui/)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the “Software”), to deal
